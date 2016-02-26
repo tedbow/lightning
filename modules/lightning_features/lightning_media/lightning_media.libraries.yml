@@ -37,6 +37,11 @@ media_library:
     'js/EntityGrid.js': {}
     'js/MediaLibrary.js': {}
     'js/Uploader.js': {}
+    'js/models/Embed.js': {}
+    'js/views/EmbedView.js': {}
+    'js/views/SaveView.js': {}
+    'js/views/TabsView.js': {}
+    'js/views/UploadView.js': {}
   css:
     component:
       'css/library.css': {}
