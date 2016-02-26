@@ -44,6 +44,15 @@ use. For example, if you are currently running Beta 1 and are trying to update
 to Beta 3, you will need to follow the instructions for updating from Beta 1 to
 Beta 2, then from Beta 2 to Beta 3, in that order.
 
+### Beta 2 to Beta 3
+
+* Scheduled updates to content are broken in relation to Lightning's content
+  moderation functionality. Lightning beta 3 implements a workaround out of the
+  box, but it is not applied by the update. To make the fix manually:
+  * Go to *Configuration* > *Scheduled Updates Overview* > *Scheduled Update Types*.
+  * Edit the *Publish single node at certain time* scheduled update type.
+  * 
+
 ### Beta 1 to Beta 2
 
 * Enable the ```view media``` permission for the ```anonymous``` and

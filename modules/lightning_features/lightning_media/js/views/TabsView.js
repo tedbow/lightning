@@ -1,3 +1,6 @@
+/**
+ * Displays inner views as a set of jQuery UI tabs.
+ */
 var TabsView = Backbone.View.extend({
 
   initialize: function () {
@@ -5,6 +8,7 @@ var TabsView = Backbone.View.extend({
   },
 
   render: function () {
+    // Create the empty UL for switching between tabs.
     this.$el.prepend('<ul />').tabs();
   },
 
@@ -26,13 +30,17 @@ var TabsView = Backbone.View.extend({
       return id;
     }
 
+    // Propagate the save event.
     this.listenTo(view, 'save', function (model, view) {
       this.trigger('save', model, view);
     });
 
     view.$el
+      // Store a reference to the view on the tab element.
       .data('view', view)
       .attr('id', function (undefined, id) {
+        // Use the existing ID if set, otherwise generate a random one. All tabs
+        // must have a unique ID.
         return id || randomID();
       });
 
@@ -46,6 +54,7 @@ var TabsView = Backbone.View.extend({
   },
 
   reset: function () {
+    // Reset all inner views.
     this.$el.children(':gt(0):data(view)').each(function () {
       $(this).data('view').reset();
     });
