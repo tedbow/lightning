@@ -15,8 +15,6 @@ var EmbedView = Backbone.View.extend({
   },
 
   initialize: function (options) {
-    this.model = options.model;
-
     // Prevent the user from changing the embed code after an AJAX request has begun.
     this.listenTo(this.model, 'request', function () {
       this.$('textarea').prop('disabled', true);

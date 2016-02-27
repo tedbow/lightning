@@ -24,15 +24,15 @@ var TabsView = Backbone.View.extend({
   addTab: function (view) {
     function randomID () {
       var id = '';
-      for (var i = 0; i < 12; i++) {
+      for (var i = 0; i < 16; i++) {
         id += 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.charAt(Math.floor(Math.random() * 52));
       }
       return id;
     }
 
-    // Propagate the save event.
-    this.listenTo(view, 'save', function (model, view) {
-      this.trigger('save', model, view);
+    // Propagate all events.
+    this.listenTo(view, 'all', function () {
+      this.trigger.apply(this, arguments);
     });
 
     view.$el

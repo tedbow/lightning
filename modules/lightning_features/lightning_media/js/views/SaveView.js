@@ -14,7 +14,6 @@ var SaveView = Backbone.View.extend({
   },
 
   initialize: function (options) {
-    this.model = options.model;
     this.view = options.view;
 
     this.listenTo(this.model, 'sync', function () {
