@@ -1,12 +1,5 @@
 var UploadView = Backbone.View.extend({
 
-  attributes: {
-    // The dict* messages are not displayed when the dropzone is created
-    // programmatically unless the target element already has the dropzone
-    // class. @see https://github.com/enyo/dropzone/issues/655
-    class: 'dropzone'
-  },
-
   initialize: function (options) {
     this.model = new Backbone.Model();
 
@@ -14,6 +7,11 @@ var UploadView = Backbone.View.extend({
     var model = this.model;
     model.urlRoot = options.url;
     model.on('destroy', model.clear);
+
+    // The dict* messages are not displayed when the dropzone is created
+    // programmatically unless the target element already has the dropzone
+    // class. @see https://github.com/enyo/dropzone/issues/655
+    this.$el.addClass('dropzone');
 
     this.dz = new Dropzone(this.el, {
       acceptedFiles: 'image/*',
