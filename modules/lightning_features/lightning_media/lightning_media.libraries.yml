@@ -42,6 +42,7 @@ media_library:
     'js/views/SaveView.js': {}
     'js/views/TabsView.js': {}
     'js/views/UploadView.js': {}
+    'js/MediaCreator.js': {}
   css:
     component:
       'css/library.css': {}

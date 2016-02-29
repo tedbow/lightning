@@ -3,7 +3,6 @@ describe('EmbedView', function () {
   beforeEach(function () {
     this.model = new Embed();
     this.view = new EmbedView({ model: this.model });
-    this.view.render();
     this.textarea = this.view.$('textarea').get(0);
     this.preview = this.view.$('.preview').get(0);
   });

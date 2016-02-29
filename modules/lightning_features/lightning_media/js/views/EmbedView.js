@@ -34,6 +34,8 @@ var EmbedView = Backbone.View.extend({
 
     // Clear the preview once the model has been destroyed.
     this.listenTo(this.model, 'destroy', this.clearPreview);
+
+    this.render();
   },
 
   clearPreview: function () {

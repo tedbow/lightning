@@ -4,13 +4,13 @@ function MediaCreator (editor, options, attributes) {
     'data-align': 'none',
     'data-embed-button': 'media_library',
     'data-entity-embed-display': 'entity_reference:entity_reference_entity_view',
-    'data-entity-embed-settings': '{"view_mode":"embedded"}',
+    'data-entity-embed-settings': '{"view_mode":"embedded"}'
   }, attributes || {});
 
   this.view = new TabsView(options);
 
   this.view.on('save', function (model, view) {
-    model.save().then(function (model) {
+    model.save().then(function () {
       view.reset();
 
       if (model.get('entity_type') === 'file') {
