@@ -19,7 +19,7 @@ module.exports = function(config) {
       'bower_components/underscore/underscore.js',
       'bower_components/backbone/backbone.js',
       'bower_components/dropzone/dist/dropzone.js',
-      'node_modules/es6-promise/dist/es6-promise.js',
+      'bower_components/es6-promise/es6-promise.js',
       'node_modules/jasmine-ajax/lib/mock-ajax.js',
       'node_modules/sinon/pkg/sinon.js',
       'bower_components/jquery-ui/ui/core.js',
