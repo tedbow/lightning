@@ -1,4 +1,14 @@
-function MediaCreator (editor, options, attributes) {
+/**
+ * Constructor for Lightning's CKEditor plugin allowing users to create
+ * media assets from an embed code or by uploading an image.
+ *
+ * @param {CKEditor.editor} editor
+ *   The CKEditor instance.
+ * @param {object} attributes
+ *   Attributes to be set on embedded entities.
+ * @constructor
+ */
+function MediaCreator (editor, attributes) {
 
   attributes = _.extend({
     'data-align': 'none',
@@ -7,8 +17,11 @@ function MediaCreator (editor, options, attributes) {
     'data-entity-embed-settings': '{"view_mode":"embedded"}'
   }, attributes || {});
 
-  this.view = new TabsView(options);
+  this.view = new TabsView();
 
+  // The 'save' event is a custom event fired by SaveView instances when the
+  // Save button is clicked. It expects to delegate the actual saving logic
+  // to the calling code.
   this.view.on('save', function (model, view) {
     model.save().then(function () {
       view.reset();
@@ -19,7 +32,7 @@ function MediaCreator (editor, options, attributes) {
         editor.insertHtml(model.get('thumbnail'));
       }
       else {
-        var code = $('<drupal-entity />')
+        var code = jQuery('<drupal-entity />')
           .attr(attributes)
           .attr({
             'data-entity-type': model.get('entity_type'),
@@ -59,7 +72,7 @@ MediaCreator.prototype.createEmbed = function (url, attributes) {
   this.view.addTab(t);
 
   return this;
-}
+};
 
 MediaCreator.prototype.createUpload = function (url, attributes) {
   attributes = _.extend({
@@ -78,4 +91,4 @@ MediaCreator.prototype.createUpload = function (url, attributes) {
   this.view.addTab(t);
 
   return this;
-}
+};
