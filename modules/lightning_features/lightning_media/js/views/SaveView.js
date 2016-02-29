@@ -31,12 +31,15 @@ var SaveView = Backbone.View.extend({
 
   render: function () {
     this.$el
-      .append('<footer />')
+      .append([this.view.el, '<footer />'])
       .children()
       .last()
       .append('<div><label><input type="checkbox" />' + Drupal.t('Save to my media library') + '</label></div>')
       .append('<div><button>' + Drupal.t('Save') + '</button></div>')
       .hide();
+
+    this.el.title = this.view.el.title;
+    this.view.el.title = '';
   },
 
   reset: function () {

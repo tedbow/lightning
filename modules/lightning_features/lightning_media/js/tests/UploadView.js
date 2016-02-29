@@ -11,9 +11,13 @@ describe('UploadView', function () {
     jasmine.Ajax.uninstall();
   });
 
+  it('should have the dropzone class', function () {
+    expect(this.view.$el.hasClass('dropzone')).toBe(true);
+  });
+
   it('should sync the model to the server upon successful upload', function () {
     sinon.spy(this.model, 'trigger');
-  
+
     this.view.dz.addFile({ type: 'image/png' });
     this.view.dz.processQueue();
     jasmine.Ajax.requests.mostRecent().respondWith({

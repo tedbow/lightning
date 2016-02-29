@@ -41,7 +41,7 @@ function MediaCreator (editor, options, attributes) {
 
 MediaCreator.prototype.createEmbed = function (url, attributes) {
   var model = new Embed();
-  model.urlRoot = url;
+  model.urlRoot = Drupal.url(url);
 
   attributes = _.extend({
     title: Drupal.t('Embed Code')
@@ -57,6 +57,8 @@ MediaCreator.prototype.createEmbed = function (url, attributes) {
     view: view
   });
   this.view.addTab(t);
+
+  return this;
 }
 
 MediaCreator.prototype.createUpload = function (url, attributes) {
@@ -65,7 +67,7 @@ MediaCreator.prototype.createUpload = function (url, attributes) {
   }, attributes || {});
 
   var view = new UploadView({
-    url: url,
+    url: Drupal.url(url),
     attributes: attributes
   });
 
@@ -74,4 +76,6 @@ MediaCreator.prototype.createUpload = function (url, attributes) {
     view: view
   });
   this.view.addTab(t);
+
+  return this;
 }

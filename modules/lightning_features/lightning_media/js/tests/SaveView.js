@@ -3,10 +3,19 @@ describe('SaveView', function () {
   beforeEach(function () {
     this.view = new SaveView({
       view:
-        new Backbone.View(),
+        new Backbone.View({
+          attributes: {
+            title: 'Foobaz'
+          }
+        }),
       model:
         new Backbone.Model()
     });
+  });
+
+  it('should take on the title of the inner view', function () {
+    expect(this.view.el.title).toBe('Foobaz');
+    expect(this.view.view.el.title).toBeFalsy();
   });
 
   it('should have all the necessary HTML elements when rendered', function () {
