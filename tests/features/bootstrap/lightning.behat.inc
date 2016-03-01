@@ -306,4 +306,39 @@ class LightningSubContext extends DrupalSubContextBase implements DrupalSubConte
     $this->scrollToElement($selector);
   }
 
+  /**
+   * Makes an element visible.
+   *
+   * @param string $selector
+   *   The element's CSS selector.
+   *
+   * @When I make the :selector element visible
+   */
+  public function makeElementVisible($selector) {
+    $query = 'document.querySelector("' . addslashes($selector) . '")';
+
+    $session = $this->getSession();
+    $session->executeScript($query . '.style.display = "block"');
+    $session->executeScript($query . '.style.visibility = "visible"');
+    $session->executeScript($query . '.style.opacity = 1');
+    $session->executeScript($query . '.style.width = "auto"');
+    $session->executeScript($query . '.style.height = "auto"');
+    $session->executeScript($query . '.style.left = 0');
+    $session->executeScript($query . '.style.top = 0');
+    $session->executeScript($query . '.style.zIndex = 1000000');
+  }
+
+  /**
+   * Wait for a bit.
+   *
+   * @param int $seconds
+   *  How long to wait, in seconds.
+   *
+   * @When I wait :seconds seconds
+   * @When I wait :seconds second
+   */
+  public function wait($seconds) {
+    sleep($seconds);
+  }
+
 }

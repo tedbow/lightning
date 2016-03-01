@@ -18,6 +18,10 @@ var UploadView = Backbone.View.extend({
       addRemoveLinks: true,
       dictDefaultMessage: Drupal.t('Click or drag and drop an image here to upload it.'),
       dictFallbackMessage: Drupal.t('Click here to upload an image'),
+      init: function () {
+        // Set a unique identifier on the hidden file field, for testing.
+        this.hiddenFileInput.name = '__dropzone_' + UploadView.count++;
+      },
       maxFiles: 1,
       thumbnailHeight: null,
       thumbnailWidth: null,
@@ -26,7 +30,7 @@ var UploadView = Backbone.View.extend({
     .on('success', function (file, response) {
       model.set(response).trigger('sync', model, response, {});
     })
-    .on('removedfile', function (file) {
+    .on('removedfile', function () {
       if (model.destroy) {
         model.destroy();
       }
@@ -42,4 +46,4 @@ var UploadView = Backbone.View.extend({
     this.model.destroy = gozer;
   }
 
-});
+}, { count: 0 });
