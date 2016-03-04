@@ -34,6 +34,7 @@ function lightning_form_install_configure_form_alter(array &$form, FormStateInte
       'lightning_media' => 'Lightning Media',
       'lightning_layout' => 'Lightning Layout',
       'lightning_workflow' => 'Lightning Workflow',
+      'lightning_preview' => 'Lightning Preview',
     ],
   ];
   // All our extensions are checked by default.

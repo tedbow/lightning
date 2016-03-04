@@ -1,0 +1,7 @@
+name: Lightning Preview
+type: module
+core: 8.x
+descripition: Preview everything before you publish.
+package: Lightning
+dependencies:
+  - multiversion
