@@ -72,7 +72,10 @@ projects:
     subdir: contrib/preview
   multiversion:
     type: module
-    version: 1.0-alpha5
+    download:
+      type: git
+      branch: 8.x-1.x
+      revision: bd5d4b8f0add61ee975ec34cf2eee62af21e50f8
     subdir: contrib/preview
   # Workflow. These modules will only be enabled if the associated Lightning
   # Workflow module is enabled.
