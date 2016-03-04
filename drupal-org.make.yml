@@ -97,6 +97,8 @@ projects:
       2672122: https://www.drupal.org/files/issues/anonymous_able_to_see-2672122-11.patch
       # Allow a role to moderate but not to edit content
       2652158: https://www.drupal.org/files/issues/allow_a_role_to-2652158-10.patch
+      # Don't create latest-version route/tab unless there's a canonical tab
+      2678316: https://www.drupal.org/files/issues/2678316-latest-canonical.patch
   # ---
   # Other Modules. These modules provide general expected functionality or
   # enhancements not directly related to Lightning Core Features.

@@ -59,6 +59,7 @@ projects[workbench_moderation][subdir] = contrib/workflow
 projects[workbench_moderation][patch][] = https://www.drupal.org/files/issues/2668006-2.patch
 projects[workbench_moderation][patch][] = https://www.drupal.org/files/issues/anonymous_able_to_see-2672122-11.patch
 projects[workbench_moderation][patch][] = https://www.drupal.org/files/issues/allow_a_role_to-2652158-10.patch
+projects[workbench_moderation][patch][] = https://www.drupal.org/files/issues/2678316-latest-canonical.patch
 projects[acquia_connector][type] = module
 projects[acquia_connector][download][type] = git
 projects[acquia_connector][download][branch] = 8.x-1.x
