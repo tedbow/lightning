@@ -10,6 +10,7 @@ use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Config\InstallStorage;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\node\Entity\NodeType;
 use Drupal\user\Entity\User;
 use Drupal\user\RoleInterface;
 use Drupal\shortcut\Entity\Shortcut;
@@ -525,3 +526,11 @@ function lightning_update_8001() {
   \Drupal::service('module_installer')->uninstall(array('lightning_media_democontent'));
 }
 
+/**
+ * Creates roles for editing content types.
+ */
+function lightning_update_8002() {
+  foreach (NodeType::loadMultiple() as $node_type) {
+    lightning_node_type_insert($node_type);
+  }
+}

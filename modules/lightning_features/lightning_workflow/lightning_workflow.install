@@ -58,3 +58,25 @@ function lightning_workflow_install() {
 
   $view->save();
 }
+
+/**
+ * Applies workflow permissions to content management roles.
+ */
+function lightning_workflow_update_8001() {
+  foreach (NodeType::loadMultiple() as $node_type) {
+    lightning_workflow_node_type_insert($node_type);
+  }
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function lightning_workflow_update_dependencies() {
+  return [
+    'lightning_workflow' => [
+      8001 => [
+        'lightning' => 8002,
+      ],
+    ]
+  ];
+}
