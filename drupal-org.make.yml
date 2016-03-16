@@ -101,6 +101,10 @@ projects:
     type: module
     version: 1.0
     subdir: contrib
+  contact_storage:
+    type: module
+    version: 1.0-beta2
+    subdir: contrib
   features:
     type: module
     version: 3.0-alpha6
