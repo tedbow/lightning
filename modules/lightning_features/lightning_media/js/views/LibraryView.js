@@ -71,6 +71,8 @@ var LibraryView = Backbone.View.extend({
     ]);
 
     this.$('footer').append('<div><button>' + Drupal.t('Place') + '</button></div>');
+
+    this.collectionView.render();
   }
 
 });
