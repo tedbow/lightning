@@ -25,6 +25,7 @@ module.exports = function(config) {
       'bower_components/jquery-ui/ui/core.js',
       'bower_components/jquery-ui/ui/widget.js',
       'bower_components/jquery-ui/ui/tabs.js',
+      'LibraryConnector.js',
       'models/*.js',
       'views/*.js',
       'tests/*.js'

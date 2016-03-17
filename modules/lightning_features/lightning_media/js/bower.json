@@ -4,6 +4,10 @@
     "jquery-ui": "^1.11.4",
     "backbone": "^1.2.3",
     "es6-promise": "^3.1.2",
-    "dropzone": "^4.3.0"
+    "dropzone": "^4.3.0",
+    "backbone.collectionView": "^1.0.6"
+  },
+  "resolutions": {
+    "backbone": "^1.2.3"
   }
 }

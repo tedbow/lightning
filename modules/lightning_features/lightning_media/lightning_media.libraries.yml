@@ -32,13 +32,11 @@ jquery.appear:
 media_library:
   version: VERSION
   js:
-    'js/Backend.js': {}
-    'js/EmbedCode.js': {}
-    'js/EntityGrid.js': {}
     'js/MediaLibrary.js': {}
-    'js/Uploader.js': {}
+    'js/LibraryConnector.js': {}
     'js/models/Embed.js': {}
     'js/views/EmbedView.js': {}
+    'js/views/LibraryView.js': {}
     'js/views/SaveView.js': {}
     'js/views/TabsView.js': {}
     'js/views/UploadView.js': {}
