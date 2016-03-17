@@ -6,7 +6,7 @@ var LibraryView = Backbone.View.extend({
 
   events: {
     'change header select': function (event) {
-      var bundle = $(event.target).val();
+      var bundle = jQuery(event.target).val();
       this.backend.filterByBundle(bundle);
     },
 
@@ -14,7 +14,7 @@ var LibraryView = Backbone.View.extend({
       this.backend.search(event.target.value);
     },
 
-    'keyup header input': _.debounce(function (event) { $(event.target).trigger('change'); }, 600),
+    'keyup header input': _.debounce(function (event) { jQuery(event.target).trigger('change'); }, 600),
 
     'click footer button': function () {
       this.trigger('place', this.collectionView.getSelectedModel(), this);
@@ -31,13 +31,6 @@ var LibraryView = Backbone.View.extend({
     }
   }),
 
-  onAddBundle: function (model) {
-    this.$('header select')
-      .append('<option value="' + model.get('id') + '">' + model.get('label') + '</option>')
-      .closest(':hidden')
-      .show();
-  },
-
   initialize: function (options) {
     this.backend = options.backend;
 
@@ -46,7 +39,7 @@ var LibraryView = Backbone.View.extend({
     });
 
     this.collectionView = new Backbone.CollectionView({
-      collection: this.collection,
+      collection: this.backend,
       el: document.createElement('ul'),
       emptyListCaption: Drupal.t('There are no items to display.'),
       modelView: this.thumbnailView
@@ -54,8 +47,18 @@ var LibraryView = Backbone.View.extend({
 
     this.render();
 
+    function _addBundleOption (id, label) {
+      this.$('header select')
+      .append('<option value="' + id + '">' + label + '</option>')
+      .parent()
+      .show();
+    }
+
     if (options.bundles) {
-      options.bundles.on('add', this.onAddBundle, this);
+      var self = this;
+      options.bundles.then(function (bundles) {
+        _.each(bundles, function (bundle) { _addBundleOption.apply(self, bundle); });
+      });
     }
   },
 

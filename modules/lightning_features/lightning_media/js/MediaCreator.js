@@ -19,35 +19,41 @@ function MediaCreator (editor, attributes) {
 
   this.view = new TabsView();
 
+  function doEmbed (model) {
+    if (model.get('entity_type') === 'file') {
+      // Files are not renderable by default (not without file_entity installed,
+      // anyway), so if the entity is a file, embed the thumbnail directly.
+      editor.insertHtml(model.get('thumbnail'));
+    }
+    else {
+      var code = jQuery('<drupal-entity />')
+      .attr(attributes)
+      .attr({
+        'data-entity-type': model.get('entity_type'),
+        'data-entity-bundle': model.get('bundle'),
+        'data-entity-id': model.id,
+        'data-entity-label': model.get('label'),
+        'data-entity-uuid': model.get('uuid')
+      })
+      .prop('outerHTML');
+
+      editor.insertHtml(code);
+    }
+  }
+
   // The 'save' event is a custom event fired by SaveView instances when the
   // Save button is clicked. It expects to delegate the actual saving logic
   // to the calling code.
   this.view.on('save', function (model, view) {
     model.save().then(function () {
       view.reset();
-
-      if (model.get('entity_type') === 'file') {
-        // Files are not renderable by default (not without file_entity installed,
-        // anyway), so if the entity is a file, embed the thumbnail directly.
-        editor.insertHtml(model.get('thumbnail'));
-      }
-      else {
-        var code = jQuery('<drupal-entity />')
-          .attr(attributes)
-          .attr({
-            'data-entity-type': model.get('entity_type'),
-            'data-entity-bundle': model.get('bundle'),
-            'data-entity-id': model.id,
-            'data-entity-label': model.get('label'),
-            'data-entity-uuid': model.get('uuid')
-          })
-          .prop('outerHTML');
-
-        editor.insertHtml(code);
-      }
-
+      doEmbed(model);
       model.clear();
     });
+  });
+
+  this.view.on('place', function (model) {
+    doEmbed(model);
   });
 
 }
@@ -89,6 +95,31 @@ MediaCreator.prototype.createUpload = function (url, attributes) {
     view: view
   });
   this.view.addTab(t);
+
+  return this;
+};
+
+MediaCreator.prototype.createLibrary = function (url, bundle_url, attributes) {
+  var options = {};
+
+  options.backend = new LibraryConnector([], {
+    baseUrl: Drupal.url(url)
+  });
+
+  options.attributes = _.extend({
+    title: Drupal.t('Media Library')
+  }, attributes || {});
+
+  if (bundle_url) {
+    options.bundles = jQuery.ajax({
+      url: Drupal.url(bundle_url),
+      headers: {
+        Accept: 'application/json'
+      }
+    }).then(_.pairs);
+  }
+
+  this.view.addTab(new LibraryView(options));
 
   return this;
 };

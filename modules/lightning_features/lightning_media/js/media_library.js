@@ -26,6 +26,7 @@
 
         exec: function (editor) {
           new MediaCreator(editor)
+            .createLibrary('lightning/media/library', 'lightning/media/media_bundle')
             .createUpload('lightning/upload')
             .createEmbed('lightning/embed-code')
             .view.on('save', function () {
