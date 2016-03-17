@@ -7,6 +7,52 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeTypeInterface;
+use Drupal\user\Entity\Role;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function lightning_node_type_insert(NodeTypeInterface $node_type) {
+  Role::create([
+    'id' => $node_type->id() . '_creator',
+    'label' => t('@type Creator', [
+      '@type' => $node_type->label(),
+    ]),
+    'permissions' => [
+      'create ' . $node_type->id() . ' content',
+      'edit own ' . $node_type->id() . ' content',
+      'view ' . $node_type->id() . ' revisions',
+      'view own unpublished content',
+      'create url aliases',
+    ],
+  ])->save();
+
+  Role::create([
+    'id' => $node_type->id() . '_reviewer',
+    'label' => t('@type Reviewer', [
+      '@type' => $node_type->label(),
+    ]),
+    'permissions' => [
+      // @TODO
+    ],
+  ])->save();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function lightning_node_type_delete(NodeTypeInterface $node_type) {
+  $role = Role::load($node_type->id() . '_creator');
+  if ($role) {
+    $role->delete();
+  }
+
+  $role = Role::load($node_type->id() . '_reviewer');
+  if ($role) {
+    $role->delete();
+  }
+}
 
 /**
  * Implements hook_form_FORM_ID_alter() for install_configure_form().
@@ -39,32 +85,13 @@ function lightning_form_install_configure_form_alter(array &$form, FormStateInte
   // All our extensions are checked by default.
   $form['lightning']['extensions']['#default_value'] = array_keys($form['lightning']['extensions']['#options']);
 
-  $form['lightning']['demo_content'] = [
-    '#type' => 'checkbox',
-    '#title' => t('Install demo content'),
-    '#default_value' => TRUE,
-    '#weight' => 2,
-  ];
-
   $form['#submit'][] = 'lightning_extensions_enable';
-}
-
-/**
- * Returns whether demo content was or should be installed.
- *
- * @return bool
- */
-function lightning_demo_content() {
-  return \Drupal::state()->get('lightning.demo_content', FALSE);
 }
 
 /**
  * Enable requested Lightning extensions and demo content.
  */
 function lightning_extensions_enable($form_id, FormStateInterface $form_state) {
-  // Set a flag if we need to install demo content.
-  \Drupal::state()->set('lightning.demo_content', $form_state->getValue('demo_content'));
-
   $features = array_filter($form_state->getValue('extensions'));
   if ($features) {
     if (in_array('lightning_media', $features)) {

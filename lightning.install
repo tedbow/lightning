@@ -10,6 +10,7 @@ use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Config\InstallStorage;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\node\Entity\NodeType;
 use Drupal\user\Entity\User;
 use Drupal\user\RoleInterface;
 use Drupal\shortcut\Entity\Shortcut;
@@ -487,10 +488,11 @@ function lightning_read_config($id, $module = 'lightning') {
 }
 
 /**
- * Installs the body field on the basic block_content type and deletes the
- * Create landing page shortcut.
+ * Install the body field on the basic block_content type, delete the Create
+ * landing page shortcut, and uninstall the Media Demo Content Module.
  */
 function lightning_update_8001() {
+  // Install the body field on the basic block_content type
   $field = FieldConfig::load('block_content.basic.body');
   if (empty($field)) {
     $values = lightning_read_config('field.field.block_content.basic.body');
@@ -513,11 +515,22 @@ function lightning_update_8001() {
     }
   }
 
-  // Deletes the `Create Landing Page` toolbar shortcut.
+  // Delete the `Create Landing Page` toolbar shortcut.
   $properties = ['link__uri' => 'internal:/admin/structure/landing-page'];
   $shortcuts = \Drupal::entityTypeManager()->getStorage('shortcut')->loadByProperties($properties);
   foreach ($shortcuts as $shortcut) {
     $shortcut->delete();
   }
+
+  // Uninstall the Media Demo Content module.
+  \Drupal::service('module_installer')->uninstall(array('lightning_media_democontent'));
 }
 
+/**
+ * Creates roles for editing content types.
+ */
+function lightning_update_8002() {
+  foreach (NodeType::loadMultiple() as $node_type) {
+    lightning_node_type_insert($node_type);
+  }
+}
