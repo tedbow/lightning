@@ -14,7 +14,9 @@ var LibraryView = Backbone.View.extend({
       this.backend.search(event.target.value);
     },
 
-    'keyup header input': _.debounce(function (event) { jQuery(event.target).trigger('change'); }, 600),
+    'keyup header input': _.debounce(function (event) {
+      jQuery(event.target).trigger('change');
+    }, 600),
 
     'click footer button': function () {
       this.trigger('place', this.collectionView.getSelectedModel(), this);
@@ -31,6 +33,14 @@ var LibraryView = Backbone.View.extend({
     }
   }),
 
+  /**
+   *
+   * @param {object} options
+   *   backend: An instance of LibraryConnector for communicating with the
+   *   Drupal backend. Required.
+   *   bundles: Optional promise wrapping an array of [id, label] pairs for
+   *   each available bundle.
+   */
   initialize: function (options) {
     this.backend = options.backend;
 
@@ -57,7 +67,9 @@ var LibraryView = Backbone.View.extend({
     if (options.bundles) {
       var self = this;
       options.bundles.then(function (bundles) {
-        _.each(bundles, function (bundle) { _addBundleOption.apply(self, bundle); });
+        _.each(bundles, function (bundle) {
+          _addBundleOption.apply(self, bundle);
+        });
       });
     }
   },

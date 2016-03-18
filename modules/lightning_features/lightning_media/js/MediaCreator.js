@@ -58,17 +58,16 @@ function MediaCreator (editor, attributes) {
 
 }
 
-MediaCreator.prototype.createEmbed = function (url, attributes) {
+MediaCreator.prototype.createEmbed = function (url) {
   var model = new Embed();
   model.urlRoot = Drupal.url(url);
 
-  attributes = _.extend({
-    title: Drupal.t('Embed Code')
-  }, attributes || {});
-
   var view = new EmbedView({
     model: model,
-    attributes: attributes
+    attributes: {
+      title: Drupal.t('Embed Code'),
+      class: 'embed'
+    }
   });
 
   var t = new SaveView({
@@ -80,14 +79,13 @@ MediaCreator.prototype.createEmbed = function (url, attributes) {
   return this;
 };
 
-MediaCreator.prototype.createUpload = function (url, attributes) {
-  attributes = _.extend({
-    title: Drupal.t('Upload Image')
-  }, attributes || {});
-
+MediaCreator.prototype.createUpload = function (url {
   var view = new UploadView({
     url: Drupal.url(url),
-    attributes: attributes
+    attributes: {
+      title: Drupal.t('Upload Image'),
+      class: 'upload'
+    }
   });
 
   var t = new SaveView({
@@ -99,16 +97,17 @@ MediaCreator.prototype.createUpload = function (url, attributes) {
   return this;
 };
 
-MediaCreator.prototype.createLibrary = function (url, bundle_url, attributes) {
-  var options = {};
+MediaCreator.prototype.createLibrary = function (url, bundle_url) {
+  var options = {
+    attributes: {
+      title: Drupal.t('Media Library'),
+      class: 'library'
+    }
+  };
 
   options.backend = new LibraryConnector([], {
     baseUrl: Drupal.url(url)
   });
-
-  options.attributes = _.extend({
-    title: Drupal.t('Media Library')
-  }, attributes || {});
 
   if (bundle_url) {
     options.bundles = jQuery.ajax({
