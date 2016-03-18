@@ -22,25 +22,11 @@ var LibraryView = Backbone.View.extend({
       this.trigger('place', this.collectionView.getSelectedModel(), this);
     },
 
-    'appear footer': function () {
+    'appear .load-more': function () {
       this.backend.loadMore();
     }
   },
 
-  thumbnailView: Backbone.View.extend({
-    initialize: function (options) {
-      this.el.innerHTML = options.model.get('thumbnail');
-    }
-  }),
-
-  /**
-   *
-   * @param {object} options
-   *   backend: An instance of LibraryConnector for communicating with the
-   *   Drupal backend. Required.
-   *   bundles: Optional promise wrapping an array of [id, label] pairs for
-   *   each available bundle.
-   */
   initialize: function (options) {
     this.backend = options.backend;
 
@@ -48,24 +34,33 @@ var LibraryView = Backbone.View.extend({
       this.$('footer').toggleClass('waiting');
     });
 
+    // The view used to render each media item in the library.
+    var _thumbnailView = Backbone.View.extend({
+      initialize: function (options) {
+        this.el.innerHTML = options.model.get('thumbnail');
+      }
+    });
+
     this.collectionView = new Backbone.CollectionView({
       collection: this.backend,
       el: document.createElement('ul'),
       emptyListCaption: Drupal.t('There are no items to display.'),
-      modelView: this.thumbnailView
+      modelView: _thumbnailView
     });
 
     this.render();
 
-    function _addBundleOption (id, label) {
-      this.$('header select')
-      .append('<option value="' + id + '">' + label + '</option>')
-      .parent()
-      .show();
-    }
-
+    // options.bundles is an optional promise wrapping an array of [id, label]
+    // pairs for all filterable media bundles.
     if (options.bundles) {
+      function _addBundleOption (id, label) {
+        this.$('header select')
+        .append('<option value="' + id + '">' + label + '</option>')
+        .parent()
+        .show();
+      }
       var self = this;
+
       options.bundles.then(function (bundles) {
         _.each(bundles, function (bundle) {
           _addBundleOption.apply(self, bundle);
@@ -79,12 +74,19 @@ var LibraryView = Backbone.View.extend({
 
     this.$('header').append([
       '<div><input type="search" class="search" placeholder="' + Drupal.t('Search') + '" /></div>',
+      // The wrapper should be hidden initially, and displayed as soon as we
+      // add a bundle. See private _addBundleOption function in initialize().
       '<div style="display: none;"><select id="__bundle"><option>' + Drupal.t('- all -') + '</option></select></div>'
     ]);
 
     this.$('footer').append('<div><button>' + Drupal.t('Place') + '</button></div>');
 
+    // Render the collection view.
     this.collectionView.render();
+
+    // Wrap the collection view in a scrollable DIV and add an element to
+    // trigger infinite scrolling.
+    this.collectionView.$el.wrap('<div class="scroll"></div>').parent().append('<div class="load-more"></div>');
   }
 
 });
