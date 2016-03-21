@@ -122,11 +122,12 @@ function lightning_extensions_enable($form_id, FormStateInterface $form_state) {
  *   The config data.
  */
 function lightning_read_config($id, $module = 'lightning') {
-  // Keep the FileStorage in case we need it.
-  static $storage;
-  if (empty($storage)) {
+  // Statically cache all FileStorage objects, keyed by module.
+  static $storage = [];
+
+  if (empty($storage[$module])) {
     $dir = \Drupal::service('module_handler')->getModule($module)->getPath();
-    $storage = new FileStorage($dir . '/' . InstallStorage::CONFIG_INSTALL_DIRECTORY);
+    $storage[$module] = new FileStorage($dir . '/' . InstallStorage::CONFIG_INSTALL_DIRECTORY);
   }
-  return $storage->read($id);
+  return $storage[$module]->read($id);
 }
