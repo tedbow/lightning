@@ -7,6 +7,7 @@
 
 namespace Acquia\Lightning\Command;
 
+use Doctrine\Common\Inflector\Inflector;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -52,18 +53,24 @@ class UpdateCommand extends Command {
 
     $sequence = [];
     while ($i < $end) {
-      $sequence[] = $versions[$i] . '_' . $versions[++$i];
+      $update = [
+        $versions[$i],
+        $versions[++$i]
+      ];
+      // PHPCS hates uncamelized methods, so we need to inflect.
+      $function = Inflector::camelize(implode(' ', $update));
+      $sequence[$function] = $update;
     }
-    foreach ($sequence as $function) {
+    foreach ($sequence as $function => $versions) {
       call_user_func([$this, $function]);
-      $output->writeln('Ran ' . $function . ' updates.');
+      $output->writeln('Updated ' . $versions[0] . ' to ' . $versions[1] . '.');
     }
   }
 
   /**
    * Updates from beta1 to beta2.
    */
-  private function beta1_beta2() {
+  private function beta1Beta2() {
     `drush role-add-perm anonymous "view media"`;
     `drush role-add-perm authenticated "view media"`;
     `drush pm-enable lightning_workflow --yes`;
@@ -72,7 +79,7 @@ class UpdateCommand extends Command {
   /**
    * Updates from beta2 to beta3.
    */
-  private function beta2_beta3() {
+  private function beta2Beta3() {
     $config_id = 'scheduled_updates.scheduled_update_type.node_embargo';
 
     `drush config-set $config_id update_types_supported '["embedded"] --format=json --yes`;
@@ -83,14 +90,14 @@ class UpdateCommand extends Command {
   /**
    * Updates from beta3 to beta4.
    */
-  private function beta3_beta4() {
+  private function beta3Beta4() {
     $this->updateDB();
   }
 
   /**
    * Updates from beta4 to beta5.
    */
-  private function beta4_beta5() {
+  private function beta4Beta5() {
     $config_id = 'scheduled_updates.scheduled_update_type.multiple_node_embargo';
 
     `drush config-set $config_id update_types_supported '["independent"]' --format=json --yes`;
@@ -101,7 +108,7 @@ class UpdateCommand extends Command {
   /**
    * Updates from beta5 to rc1.
    */
-  private function beta5_rc1() {
+  private function beta5Rc1() {
     $this->updateDB();
   }
 
