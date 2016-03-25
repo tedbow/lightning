@@ -13,6 +13,9 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Executes all manual update steps for upgrade path testing.
+ */
 class UpdateCommand extends Command {
 
   /**
@@ -33,8 +36,6 @@ class UpdateCommand extends Command {
    * {@inheritdoc}
    */
   protected function configure() {
-    $head = end($this->versions);
-
     $this
       ->setName('update')
       ->setDescription('Executes manual update steps automatically ;)')
@@ -55,7 +56,7 @@ class UpdateCommand extends Command {
     while ($i < $end) {
       $update = [
         $versions[$i],
-        $versions[++$i]
+        $versions[++$i],
       ];
       // PHPCS hates uncamelized methods, so we need to inflect.
       $function = Inflector::camelize(implode(' ', $update));
@@ -91,7 +92,7 @@ class UpdateCommand extends Command {
    * Updates from beta3 to beta4.
    */
   private function beta3Beta4() {
-    $this->updateDB();
+    $this->updateDatabase();
   }
 
   /**
@@ -109,13 +110,13 @@ class UpdateCommand extends Command {
    * Updates from beta5 to rc1.
    */
   private function beta5Rc1() {
-    $this->updateDB();
+    $this->updateDatabase();
   }
 
   /**
    * Does a normal database update.
    */
-  private function updateDB() {
+  private function updateDatabasge() {
     `drush updatedb --yes`;
   }
 
