@@ -16,10 +16,18 @@ dropzone.js:
       'libraries/dropzone/dist/min/dropzone.min.css':
         minified: true
 
+es6-promise:
+  version: 3.0.2
+  js:
+    'libraries/es6-promise/dist/es6-promise.min.js':
+      minified: true
+    'libraries/es6-promise/es6-promise.min.js':
+      minified: true
+
 jquery.appear:
   version: 0.3.6
   js:
-    'libraries/jquery.appear/jquery.appear.js': {}
+    'libraries/jquery_appear/jquery.appear.js': {}
   dependencies:
     - core/jquery
 
