@@ -25,7 +25,9 @@ module.exports = function(config) {
     files: [
       base('libraries/dropzone/dist/min/dropzone.min.js'),
       'docroot/core/assets/vendor/jquery/jquery.min.js',
-      'docroot/core/assets/vendor/jquery.ui/ui/*-min.js',
+      'docroot/core/assets/vendor/jquery.ui/ui/core-min.js',
+      'docroot/core/assets/vendor/jquery.ui/ui/widget-min.js',
+      'docroot/core/assets/vendor/jquery.ui/ui/tabs-min.js',
       'docroot/core/assets/vendor/underscore/underscore-min.js',
       'docroot/core/assets/vendor/backbone/backbone-min.js',
       base('libraries/backbone.collectionView/dist/backbone.collectionView.min.js'),
