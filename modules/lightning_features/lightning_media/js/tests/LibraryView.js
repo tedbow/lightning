@@ -2,10 +2,8 @@ describe('LibraryView', function () {
 
   beforeEach(function () {
     this.backend = new LibraryConnector([], { baseUrl: '/' });
-    this.bundles = new Backbone.Collection();
     this.view = new LibraryView({
-      backend: this.backend,
-      bundles: this.bundles
+      backend: this.backend
     });
   });
 
@@ -24,15 +22,6 @@ describe('LibraryView', function () {
     expect(this.backend.search).toHaveBeenCalledWith('Foo');
   });
 
-  it('should add options to the bundle selector as they become available', function () {
-    this.bundles.add([{ id: 'foo', label: 'Foobaz' }]);
-
-    var $options = this.view.$('header select option');
-    expect($options.length).toBe(2);
-    expect($options[1].value).toBe('foo');
-    expect($options[1].text).toBe('Foobaz');
-  });
-
   it('should trigger the place event when the Place button is clicked', function () {
     spyOn(this.view, 'trigger');
 
@@ -43,7 +32,7 @@ describe('LibraryView', function () {
   it('should load more items when the footer fires the appear event', function () {
     spyOn(this.backend, 'loadMore');
 
-    this.view.$('footer').trigger('appear');
+    this.view.$('.load-more').trigger('appear');
     expect(this.backend.loadMore).toHaveBeenCalled();
   });
 
