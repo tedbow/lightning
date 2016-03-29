@@ -79,7 +79,7 @@ MediaCreator.prototype.createEmbed = function (url) {
   return this;
 };
 
-MediaCreator.prototype.createUpload = function (url {
+MediaCreator.prototype.createUpload = function (url) {
   var view = new UploadView({
     url: Drupal.url(url),
     attributes: {

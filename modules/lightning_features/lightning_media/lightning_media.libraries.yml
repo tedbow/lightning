@@ -1,5 +1,5 @@
 backbone.collectionView:
-  version: 1.0.0
+  version: 1.0.6
   js:
     'libraries/backbone.collectionView/dist/backbone.collectionView.min.js':
       minified: true
@@ -7,7 +7,7 @@ backbone.collectionView:
     - core/backbone
 
 dropzone.js:
-  version: 4.2.0
+  version: 4.3.0
   js:
     'libraries/dropzone/dist/min/dropzone.min.js':
       minified: true
@@ -15,14 +15,6 @@ dropzone.js:
     component:
       'libraries/dropzone/dist/min/dropzone.min.css':
         minified: true
-
-es6-promise:
-  version: 3.0.2
-  js:
-    'libraries/es6-promise/dist/es6-promise.min.js':
-      minified: true
-    'libraries/es6-promise/es6-promise.min.js':
-      minified: true
 
 jquery.appear:
   version: 0.3.6
@@ -34,7 +26,6 @@ jquery.appear:
 media_library:
   version: VERSION
   js:
-    'js/MediaLibrary.js': {}
     'js/LibraryConnector.js': {}
     'js/models/Embed.js': {}
     'js/views/EmbedView.js': {}
