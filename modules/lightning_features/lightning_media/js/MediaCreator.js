@@ -65,7 +65,7 @@ MediaCreator.prototype.createEmbed = function (url) {
   var view = new EmbedView({
     model: model,
     attributes: {
-      title: Drupal.t('Embed Code'),
+      title: Drupal.t('Create Embed'),
       class: 'embed'
     }
   });

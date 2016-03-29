@@ -34,6 +34,7 @@
             })
             .$el.dialog({
               modal: true,
+              title: Drupal.t('Media Library'),
               width: '60%'
             });
         }

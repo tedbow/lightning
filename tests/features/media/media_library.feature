@@ -19,7 +19,7 @@ Feature: Media library CKEditor widget
     And I wait for AJAX to finish
     And I execute the "media_library" command in CKEditor "edit-body-0-value"
     And I wait for AJAX to finish
-    And I select "image" from "lightning-media-bundle"
+    And I select "image" from "__bundle"
     And I wait for AJAX to finish
     Then I should see "There are no items to display."
 
