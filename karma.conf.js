@@ -2,6 +2,10 @@
 // Generated on Tue Mar 29 2016 13:32:10 GMT-0400 (EDT)
 
 module.exports = function(config) {
+  function media (js) {
+    return './modules/lightning_features/lightning_media/' + js;
+  }
+
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -15,6 +19,18 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'libraries/dropzone/dist/min/dropzone.min.js',
+      'libraries/jquery/jquery.min.js',
+      'libraries/jqueryui/ui/minified/jquery-ui.min.js',
+      'libraries/underscore/underscore-min.js',
+      'libraries/backbone/backbone-min.js',
+      'libraries/backbone.collectionView/dist/backbone.collectionView.min.js',
+      'node_modules/jasmine-ajax/lib/mock-ajax.js',
+      'node_modules/sinon/pkg/sinon.js',
+      media('js/LibraryConnector.js'),
+      media('js/models/*.js'),
+      media('js/views/*.js'),
+      media('js/tests/*.js')
     ],
 
 
