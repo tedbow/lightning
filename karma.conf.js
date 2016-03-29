@@ -2,8 +2,12 @@
 // Generated on Tue Mar 29 2016 13:32:10 GMT-0400 (EDT)
 
 module.exports = function(config) {
-  function media (js) {
-    return './modules/lightning_features/lightning_media/' + js;
+  function base (script) {
+    return './docroot/profiles/lightning/' + script;
+  }
+
+  function media (script) {
+    return base('modules/lightning_features/lightning_media/' + script);
   }
 
   config.set({
@@ -19,12 +23,12 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'libraries/dropzone/dist/min/dropzone.min.js',
-      'libraries/jquery/jquery.min.js',
-      'libraries/jqueryui/ui/minified/jquery-ui.min.js',
-      'libraries/underscore/underscore-min.js',
-      'libraries/backbone/backbone-min.js',
-      'libraries/backbone.collectionView/dist/backbone.collectionView.min.js',
+      base('libraries/dropzone/dist/min/dropzone.min.js'),
+      'docroot/core/assets/vendor/jquery/jquery.min.js',
+      'docroot/core/assets/vendor/jquery.ui/ui/*-min.js',
+      'docroot/core/assets/vendor/underscore/underscore-min.js',
+      'docroot/core/assets/vendor/backbone/backbone-min.js',
+      base('libraries/backbone.collectionView/dist/backbone.collectionView.min.js'),
       'node_modules/jasmine-ajax/lib/mock-ajax.js',
       'node_modules/sinon/pkg/sinon.js',
       media('js/LibraryConnector.js'),

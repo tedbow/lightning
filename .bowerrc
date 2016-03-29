@@ -1,3 +1,11 @@
 {
-	"directory": "libraries"
+	"directory": "libraries",
+	// These dependencies ship with Drupal core.
+	"ignoredDependencies": [
+		"jquery",
+		"jqueryui",
+		"jquery-ui",
+		"backbone",
+		"underscore"
+	]
 }
