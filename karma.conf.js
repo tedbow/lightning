@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Thu Feb 04 2016 21:33:25 GMT-0500 (EST)
+// Generated on Tue Mar 29 2016 13:32:10 GMT-0400 (EDT)
 
 module.exports = function(config) {
   config.set({
@@ -15,19 +15,6 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'bower_components/jquery/dist/jquery.js',
-      'bower_components/underscore/underscore.js',
-      'bower_components/backbone/backbone.js',
-      'bower_components/dropzone/dist/dropzone.js',
-      'node_modules/jasmine-ajax/lib/mock-ajax.js',
-      'node_modules/sinon/pkg/sinon.js',
-      'bower_components/jquery-ui/ui/core.js',
-      'bower_components/jquery-ui/ui/widget.js',
-      'bower_components/jquery-ui/ui/tabs.js',
-      'LibraryConnector.js',
-      'models/*.js',
-      'views/*.js',
-      'tests/*.js'
     ],
 
 
@@ -76,6 +63,6 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity,
+    concurrency: Infinity
   })
 }
