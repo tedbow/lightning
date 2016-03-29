@@ -154,21 +154,6 @@ class LightningSubContext extends DrupalSubContextBase implements DrupalSubConte
   }
 
   /**
-   * Executes a CKEditor command.
-   *
-   * @param string $command
-   *   The command ID, as known to CKEditor's API.
-   * @param string $id
-   *   The editor's instance ID in CKEDITOR.instances.
-   *
-   * @When I execute the :command command in CKEditor :id
-   */
-  public function iExecuteTheCommandInCkeditor($command, $id) {
-    $this->getSession()
-      ->evaluateScript("CKEDITOR.instances['$id'].execCommand('$command');");
-  }
-
-  /**
    * Asserts that an element, specified by CSS selector, exists.
    *
    * @param string $selector

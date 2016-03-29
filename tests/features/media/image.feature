@@ -13,7 +13,7 @@
   Scenario: Uploading an image from within CKEditor
     Given I am logged in as a user with the "administrator" role
     When I visit "/node/add/page"
-    And I execute the "media_library" command in CKEditor "edit-body-0-value"
+    And I open the CKEditor media library
     And I click "Upload Image"
     And I make the "input[name='__dropzone_0']" element visible
     And I attach the file "puppy.jpg" to "__dropzone_0"
