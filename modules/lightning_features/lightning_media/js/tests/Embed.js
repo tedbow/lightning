@@ -40,6 +40,7 @@ describe('Embed', function () {
     expect(Drupal.ajax.callCount).toBe(1);
     expect(this.model.id).toBe(31);
     expect(this.model.get('commands')).toBeUndefined();
+    expect(this.model.trigger.withArgs('request').callCount).toBe(1);
     expect(this.model.trigger.withArgs('sync').callCount).toBe(1);
     
     // Clean up.

@@ -14,15 +14,15 @@ var Embed = Backbone.Model.extend({
             }
           });
 
-          // @TODO: Trigger (i.e., simulate) the 'request' event.
-
           // In Drupal 8.0.x, this requires patch #2637194.
-          ajax.execute().then(function (response) {
+          var xhr = ajax.execute().then(function (response) {
             // Any AJAX framework commands in the response have already been executed by
             // this point, so don't pollute the model with them.
             delete response.commands;
             model.set(response).trigger('sync', model, response, {});
           });
+
+          model.trigger('request', model, xhr, {});
         }
         else {
           model.destroy().then(function () {
