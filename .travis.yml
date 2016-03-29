@@ -51,9 +51,7 @@ before_script:
 script:
   - phpcs --standard=$TRAVIS_BUILD_DIR/vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --ignore=bin,*.css,*/karma.js,libraries,modules/contrib .
   - behat --strict
-  - cd ./modules/lightning_features/lightning_media/tests/js
-  # TODO: The install step should go into before_script.
-  - npm install > /dev/null
+  - cd ../../../
   - npm test
 
 matrix:
