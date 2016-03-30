@@ -50,6 +50,10 @@ var LibraryView = Backbone.View.extend({
 
     this.render();
 
+    // The backend may have loaded asynchronously, so fire a reset event to
+    // account for that.
+    this.backend.trigger('reset', this.backend, {});
+
     // options.bundles is an optional promise wrapping an array of [id, label]
     // pairs for all filterable media bundles.
     if (options.bundles) {

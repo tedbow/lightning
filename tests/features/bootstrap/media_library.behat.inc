@@ -81,4 +81,16 @@ class MediaLibrarySubContext extends DrupalSubContextBase implements DrupalSubCo
     $this->executeCkEditorCommand('media_library');
   }
 
+  /**
+   * Asserts that a jQuery UI dialog box exists with a specific title.
+   *
+   * @param string $title
+   *   The dialog box title.
+   *
+   * @Then I should see a dialog box entitled :title
+   */
+  public function assertDialogBoxByTitle($title) {
+    $this->assertSession()->elementTextContains('css', '.ui-dialog .ui-dialog-title', $title);
+  }
+
 }

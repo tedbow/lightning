@@ -51,6 +51,11 @@ var TabsView = Backbone.View.extend({
       .append('<li><a href="#' + view.el.id + '">' + view.el.title + '</a></li>')
       .parent()
       .tabs('refresh');
+
+    // If this is the first tab to be added, activate it now.
+    if (this.$el.children(':data(view)').not('ul').length == 2) {
+      this.$el.tabs('option', 'active', 0);
+    }
   },
 
   reset: function () {

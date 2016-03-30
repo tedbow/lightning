@@ -6,7 +6,7 @@ Feature: Media library CKEditor widget
     When I go to "node/add/page"
     And I wait for AJAX to finish
     And I open the CKEditor media library
-    Then I should see "Media Library"
+    Then I should see a dialog box entitled "Media Library"
 
   Scenario: Filtering the media library by media type
     Given I am logged in as a user with the page_creator role
@@ -30,7 +30,8 @@ Feature: Media library CKEditor widget
     When I go to "/node/add/page"
     And I wait for AJAX to finish
     And I open the CKEditor media library
-    And I click the ".media-library .library ul.collection-view li:first-child" element
+    And I wait for AJAX to finish
+    And I click the ".library ul.collection-view li:first-child" element
     And I press "Place"
     And I wait for AJAX to finish
     Then I should see a "form.entity-embed-dialog" element

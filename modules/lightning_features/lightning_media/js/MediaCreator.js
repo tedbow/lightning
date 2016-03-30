@@ -108,6 +108,7 @@ MediaCreator.prototype.createLibrary = function (url, bundle_url) {
   options.backend = new LibraryConnector([], {
     baseUrl: Drupal.url(url)
   });
+  options.backend.load();
 
   if (bundle_url) {
     options.bundles = jQuery.ajax({
