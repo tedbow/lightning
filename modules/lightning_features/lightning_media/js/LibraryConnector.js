@@ -15,9 +15,13 @@ var LibraryConnector = Backbone.Collection.extend({
 
     this.url = this.baseUrl
       + '?'
-      + Object.keys(this.query).map(function (k) { return k + '=' + this.query[k]; }.bind(this)).join('&');
+      + Object.keys(this.query).map(this.queryValue).join('&');
 
     this.fetch({ reset: reset || false });
+  },
+
+  queryValue: function (key) {
+    return key + '=' + this.query[key];
   },
 
   search: function (keywords) {
