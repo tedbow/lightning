@@ -50,7 +50,7 @@ var EmbedView = Backbone.View.extend({
   },
 
   render: function () {
-    this.$el.append('<textarea placeholder="' + Drupal.t('Enter a URL or embed code...') + '" />');
+    this.$el.append('<textarea id="__embed_code" placeholder="' + Drupal.t('Enter a URL or embed code...') + '" />');
     this.$el.append('<div class="preview" />');
   }
 

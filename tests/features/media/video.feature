@@ -25,7 +25,7 @@ Feature: Video media assets
     And I wait for AJAX to finish
     And I open the CKEditor media library
     And I click "Create Embed"
-    And I enter "https://www.youtube.com/watch?v=DyFYUKBEZAg" for "embed_code"
+    And I enter "https://www.youtube.com/watch?v=DyFYUKBEZAg" for "__embed_code"
     # Wait for the server to turn the embed code into an entity.
     And I wait for AJAX to finish
     And I press "Place"
