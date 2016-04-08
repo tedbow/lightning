@@ -97,6 +97,10 @@
         "drupal-composer/drupal-scaffold": "^1.2",
         "drush/drush": "dev-master",
         "drupal/deploy": "8.1.x-dev",
-        "drupal/devel": "8.*"
+        "drupal/devel": "8.*",
+        "drupal/key_value": "8.1.x-dev",
+        "drupal/multiversion": "8.1.x-dev",
+        "drupal/replication": "8.1.x-dev",
+        "drupal/workspace": "8.1.x-dev"
     }
 }

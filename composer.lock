@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "050f41df774a4b5562cd6191bdcb704a",
-    "content-hash": "84cdd638a665862d83b5587462ef1b08",
+    "hash": "4e96e4b8d214e04f29ced2773ea79972",
+    "content-hash": "ab4929df0366e3d204f9d2db93b77d56",
     "packages": [
         {
             "name": "codegyre/robo",
@@ -1241,6 +1241,34 @@
             "time": "2016-03-29 16:49:13"
         },
         {
+            "name": "drupal/entity_storage_migrate",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/entity_storage_migrate.git",
+                "reference": "cb4b5bfb09b98b518be51fa2f1d5bf5d377f5bf0"
+            },
+            "require": {
+                "drupal/core": "8.*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-8.x-1.x": "8.1.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.drupal-composer.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "This module makes it possible to install modules that provide new entity storage handlers on sites that already have entity data on the site.",
+            "homepage": "http://drupal.org/project/entity_storage_migrate",
+            "keywords": [
+                "Drupal"
+            ],
+            "time": "2016-03-29 15:36:34"
+        },
+        {
             "name": "drupal/features",
             "version": "8.3.0-beta3",
             "source": {
@@ -1312,11 +1340,11 @@
         },
         {
             "name": "drupal/key_value",
-            "version": "8.1.0",
+            "version": "dev-8.x-1.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/key_value.git",
-                "reference": "e5cf1d9918c63869f1a265bb82c40b25370a5dea"
+                "reference": "461bc1ca1579ca72e56de3768f02756438053503"
             },
             "require": {
                 "drupal/core": "8.*",
@@ -1334,7 +1362,7 @@
             ],
             "description": "Extends the core key-value API with a backend for lists and sorted sets that you can do range queries on.",
             "homepage": "https://www.drupal.org/project/key_value",
-            "time": "2015-12-05 00:22:40"
+            "time": "2016-02-27 22:16:30"
         },
         {
             "name": "drupal/layout_plugin",
@@ -1613,20 +1641,15 @@
         },
         {
             "name": "drupal/multiversion",
-            "version": "8.1.0-alpha6",
+            "version": "dev-8.x-1.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/multiversion.git",
-                "reference": "d5681bfc43c274ba3439d4c8e661205b0ed693dc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/multiversion-8.x-1.0-alpha6.zip",
-                "reference": null,
-                "shasum": null
+                "reference": "5b53ea07502afe5e4f011e122bb9f29c04c4c641"
             },
             "require": {
                 "drupal/core": "8.*",
+                "drupal/entity_storage_migrate": "8.*",
                 "drupal/key_value": "8.*",
                 "drupal/serialization": "8.*"
             },
@@ -1642,7 +1665,7 @@
             ],
             "description": "Extends the revision support for content entities.",
             "homepage": "https://www.drupal.org/project/multiversion",
-            "time": "2016-03-18 17:31:43"
+            "time": "2016-04-08 16:16:42"
         },
         {
             "name": "drupal/page_manager",
@@ -6165,7 +6188,11 @@
         "drupal/embed": 20,
         "drupal/entity_embed": 20,
         "drush/drush": 20,
-        "drupal/deploy": 20
+        "drupal/deploy": 20,
+        "drupal/key_value": 20,
+        "drupal/multiversion": 20,
+        "drupal/replication": 20,
+        "drupal/workspace": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
